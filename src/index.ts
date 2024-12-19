@@ -1,8 +1,8 @@
-import express from "express";
-import cors from "cors";
+import bodyParser from "body-parser";
 import compression from "compression";
 import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
+import cors from "cors";
+import express from "express";
 import http from "http";
 
 const app = express();
