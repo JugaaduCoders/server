@@ -14,6 +14,6 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-server.listen(process.env.SERVER_PORT, () => {
-  console.log(`Server running on port ${process.env.SERVER_PORT}`);
-});
+// server.listen(process.env.SERVER_PORT, () => {
+//   console.log(`Server running on port ${process.env.SERVER_PORT}`);
+// });
