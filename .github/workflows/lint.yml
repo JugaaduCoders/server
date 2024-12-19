@@ -28,7 +28,6 @@ jobs:
         run: |
           npm ci  # Use npm ci to install dependencies from package-lock.json (recommended for CI/CD)
 
-      # Install correct version of esbuild
       - name: Install esbuild
         run: npm install esbuild@0.23.1
 
