@@ -30,5 +30,5 @@ export const hackathonParticipantRelations = relations(
       fields: [hackathonParticipant.hackathonId],
       references: [hackathon.id],
     }),
-  })
+  }),
 );

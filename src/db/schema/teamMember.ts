@@ -11,7 +11,7 @@ export const teamMember = pgTable(
   },
   (teamMember) => ({
     primaryKey: primaryKey({ columns: [teamMember.userId, teamMember.teamId] }),
-  })
+  }),
 );
 
 export const teamMemberRelations = relations(teamMember, ({ one }) => ({
