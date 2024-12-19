@@ -6,7 +6,7 @@ import {
   boolean,
   smallint,
 } from "drizzle-orm/pg-core";
-import { user } from "./users";
+import { user } from "./user";
 import { timestamps } from "./schema.helper";
 
 export const hackathon = pgTable("Hackathons", {
