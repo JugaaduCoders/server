@@ -5,6 +5,7 @@ import {
   varchar,
   boolean,
   smallint,
+  serial,
 } from "drizzle-orm/pg-core";
 import { user } from "./user";
 import { timestamps } from "./schema.helper";
@@ -12,7 +13,7 @@ import { relations } from "drizzle-orm";
 import { hackathonParticipant } from "./hackathonParticipant";
 
 export const hackathon = pgTable("Hackathons", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: serial().primaryKey(),
   createdBy: integer().references(() => user.id),
   name: varchar({ length: 255 }).notNull(),
   registrationDeadline: date().notNull(),
