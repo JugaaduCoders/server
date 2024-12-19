@@ -16,8 +16,6 @@ export const user = pgTable("Users", {
   ...timestamps,
 });
 
-console.log(user);
-
 export const userRelations = relations(user, ({ many }) => ({
   hackathon: many(hackathon),
   hackathonParticipant: many(hackathonParticipant),
