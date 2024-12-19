@@ -8,16 +8,14 @@ import {
 import { hackathon } from "./hackathon";
 import { user } from "./user";
 import { relations } from "drizzle-orm";
+import { serial } from "drizzle-orm/pg-core";
 
 export const hackathonParticipant = pgTable("HackathonParticipants", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: serial().primaryKey(),
   submittedDate: timestamp(),
   submittedUrl: varchar({ length: 255 }),
   userId: integer().references(() => user.id),
   hackathonId: integer().references(() => hackathon.id),
-  isFinalized: boolean().default(false),
-  finalizedDate: timestamp(),
-  finalizedUrl: varchar({ length: 255 }),
 });
 
 export const hackathonParticipantRelations = relations(
