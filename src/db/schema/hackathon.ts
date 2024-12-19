@@ -12,6 +12,8 @@ import { timestamps } from "./schema.helper";
 import { relations } from "drizzle-orm";
 import { hackathonParticipant } from "./hackathonParticipant";
 
+//
+// we used date() instead of timestamp() because we are implementing linear time for starting, ending and registration of a hackathon
 export const hackathon = pgTable("Hackathons", {
   id: serial().primaryKey(),
   createdBy: integer().references(() => user.id),
