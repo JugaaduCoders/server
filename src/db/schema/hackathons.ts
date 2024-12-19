@@ -6,12 +6,12 @@ import {
   boolean,
   smallint,
 } from "drizzle-orm/pg-core";
-import { Users } from "./users";
+import { user } from "./users";
 import { timestamps } from "./schema.helper";
 
-export const Hackathons = pgTable("Hackathons", {
+export const hackathon = pgTable("Hackathons", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  createdBy: integer().references(() => Users.id),
+  createdBy: integer().references(() => user.id),
   name: varchar().notNull(),
   registrationDeadline: date().notNull(),
   startDate: date().notNull(),

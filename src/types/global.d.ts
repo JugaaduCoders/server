@@ -1,5 +1,6 @@
 declare global {
   type UserRole = "participant" | "user" | "admin";
+
   interface User {
     id: number;
     name: string;
