@@ -1,4 +1,4 @@
-import { integer, pgEnum, pgTable, serial, varchar } from "drizzle-orm/pg-core";
+import { pgEnum, pgTable, serial, varchar } from "drizzle-orm/pg-core";
 import { timestamps } from "./schema.helper";
 import { relations } from "drizzle-orm";
 import { hackathon } from "./hackathon";
@@ -15,6 +15,8 @@ export const user = pgTable("Users", {
   role: rolesEnum().notNull(),
   ...timestamps,
 });
+
+console.log(user);
 
 export const userRelations = relations(user, ({ many }) => ({
   hackathon: many(hackathon),
