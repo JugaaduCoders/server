@@ -3,10 +3,10 @@ name: Lint Node.js Server
 on:
   push:
     branches:
-      - '**' 
+      - '**'  
   pull_request:
     branches:
-      - '**'
+      - '**' 
 
 jobs:
   lint:
@@ -15,7 +15,7 @@ jobs:
     steps:
       # Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Use latest v3 for checkout
 
       # Set up Node.js
       - name: Set up Node.js
@@ -26,8 +26,17 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: |
-          npm ci  # Use `npm install` if you're not using a lock file
+          npm ci  # Use npm ci to install dependencies from package-lock.json (recommended for CI/CD)
 
       # Run ESLint
       - name: Run ESLint
         run: npm run lint  # Assumes you have a lint script in package.json
+
+      # Optional: If you want to cache `node_modules` to speed up builds
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
