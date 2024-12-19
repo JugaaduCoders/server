@@ -9,9 +9,10 @@
     "format": "prettier --write .",
     "lint": "eslint . ",
     "format:check": "prettier --check .",
-   "format:write": "prettier --write .",
-   "lint:check": "eslint .",
-   "lint:fix": "eslint --fix ."
+    "format:write": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "jest"
   },
   "lint-staged": {
     "*.ts": [
