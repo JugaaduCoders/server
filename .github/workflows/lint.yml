@@ -35,3 +35,7 @@ jobs:
       # Run ESLint
       - name: Run ESLint
         run: npm run lint  # Assumes you have a lint script in package.json
+
+       # Run Jest tests
+      - name: Run Jest tests
+        run: npm test  # Runs the `jest` command
