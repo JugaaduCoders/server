@@ -1,10 +1,4 @@
-import {
-  boolean,
-  integer,
-  pgTable,
-  timestamp,
-  varchar,
-} from "drizzle-orm/pg-core";
+import { integer, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
 import { hackathon } from "./hackathon";
 import { user } from "./user";
 import { relations } from "drizzle-orm";
@@ -30,5 +24,5 @@ export const hackathonParticipantRelations = relations(
       fields: [hackathonParticipant.hackathonId],
       references: [hackathon.id],
     }),
-  }),
+  })
 );
