@@ -1,13 +1,17 @@
 import { NextFunction, Request, Response } from "express";
-import { ErrorType } from "../types/types";
+import { ErrorType } from "../types";
 import { verifyToken } from "./jwt";
 import { createUnauthenticated, createUnauthorized } from "./response";
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.headers["authorization"];
 
   if (!token) {
-    return createUnauthenticated(res, "Verification token not found", "");
+    return createUnauthenticated(res, "", "Verification token not found");
   }
 
   try {
@@ -18,5 +22,3 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     return createUnauthorized(res, (error as Error).message, "");
   }
 };
-
-module.exports = authMiddleware;

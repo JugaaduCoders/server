@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ZodError } from "zod";
-import { GenericObject } from "../../types/types";
+import { GenericObject } from "../../types";
 import { serverLog } from "../logs";
 
 export type ResHandlerObj<T> = {
