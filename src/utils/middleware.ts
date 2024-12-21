@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { ErrorType } from "../types";
 import { verifyToken } from "./jwt";
 import { createUnauthenticated, createUnauthorized } from "./response";
 
@@ -18,7 +17,7 @@ export const authMiddleware = (
     const decode = verifyToken(token);
     req.user = decode;
     next();
-  } catch (error: ErrorType) {
+  } catch (error: Error | unknown) {
     return createUnauthorized(res, (error as Error).message, "");
   }
 };

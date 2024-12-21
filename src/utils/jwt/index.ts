@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import { ErrorType } from "../../types";
 import { serverLog } from "../logs";
 
 export function generateToken(user: User) {
@@ -19,7 +18,7 @@ export function verifyToken(token: string): User {
   try {
     const decode = jwt.verify(token, process.env.JWT_SECRET);
     return decode as User;
-  } catch (error: ErrorType) {
+  } catch (error: Error | unknown) {
     serverLog(error);
     throw new Error("Invalid or expired token");
   }
