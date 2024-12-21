@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { UserRoleEnum } from '../../types';
 
 export const UserSignUpDTOSchema = z.array(
   z.object({
