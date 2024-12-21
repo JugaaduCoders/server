@@ -8,4 +8,5 @@ declare global {
     role: UserRole;
   }
 }
+
 export {};
