@@ -1,7 +1,11 @@
 import dotenv from 'dotenv';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
+import { serverLog } from '../utils/logs';
 import { hackathon } from './schema/hackathon';
+import { hackathonParticipant } from './schema/hackathonParticipant';
+import { team } from './schema/team';
+import { teamMember } from './schema/teamMember';
 import { user } from './schema/user';
 
 dotenv.config();
@@ -26,10 +30,10 @@ const pool = new Pool({
 });
 export const db = drizzle({
   client: pool,
-  schema: { user, hackathon },
+  schema: { user, hackathon, team, teamMember, hackathonParticipant },
   logger: {
     logQuery: (query: string) => {
-      console.log(`[Drizzle Query]: ${query}`);
+      serverLog(`[Drizzle Query]: ${query}`, drizzle.name);
     },
   },
 });
