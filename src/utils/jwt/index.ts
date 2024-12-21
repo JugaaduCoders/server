@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ErrorType } from "../../types/types";
+import { ErrorType } from "../../types";
 import { serverLog } from "../logs";
 
 export function generateToken(user: User) {
