@@ -1,20 +1,20 @@
-import { eq } from "drizzle-orm";
-import { chunk } from "lodash";
-import { db } from "../../db";
-import { user } from "../../db/schema/user";
-import { CHUNK_SIZE } from "../constants";
-import { UserSignUpDTO } from "./userDto";
+import { eq } from 'drizzle-orm';
+import { chunk } from 'lodash';
+import { db } from '../../db';
+import { user } from '../../db/schema/user';
+import { CHUNK_SIZE } from '../constants';
+import { GetUserDTO, UserSignUpDTO } from './userDTO';
+import { GetUserDCO } from './userDCO';
 
-export async function getUser(dto: { id: string }) {
-  // const u = await db.select().from(user).where(eq(user.id, +dto.id));
-  const u = await db.query.user.findFirst({
+export async function getUser(
+  dto: GetUserDTO
+): Promise<GetUserDCO | undefined> {
+  return await db.query.user.findFirst({
     where: eq(user.id, Number(dto.id)),
   });
-  console.log(u);
-  return u;
 }
 
-export async function createUsers(dto: UserSignUpDTO) {
+export async function userSignUp(dto: UserSignUpDTO) {
   const chunks: UserSignUpDTO[] = chunk(dto, CHUNK_SIZE);
   await db.transaction(async (tx) => {
     await Promise.all(
@@ -23,9 +23,7 @@ export async function createUsers(dto: UserSignUpDTO) {
           .insert(user)
           .values(userChunk as unknown as typeof user.$inferInsert)
           .execute();
-
       })
     );
   });
-  
 }

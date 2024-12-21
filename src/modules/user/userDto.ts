@@ -1,9 +1,5 @@
-import { z } from "zod";
-enum UserRoleEnum {
-  PARTICIPANT = "participant",
-  USER = "user",
-  ADMIN = "admin",
-}
+import { z } from 'zod';
+
 export const UserSignUpDTOSchema = z.array(
   z.object({
     firstName: z.string().min(1).max(255),
@@ -15,5 +11,9 @@ export const UserSignUpDTOSchema = z.array(
       .default(UserRoleEnum.PARTICIPANT),
   })
 );
-
 export type UserSignUpDTO = z.infer<typeof UserSignUpDTOSchema>;
+
+export const GetUserDTOSchema = z.object({
+  id: z.coerce.number(),
+});
+export type GetUserDTO = z.infer<typeof GetUserDTOSchema>;

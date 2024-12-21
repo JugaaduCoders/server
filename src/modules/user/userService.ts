@@ -1,10 +1,11 @@
-import { UserSignUpDTO } from "./userDto";
-import * as userRepository from "./userRepository";
+import { GetUserDCO } from './userDCO';
+import { GetUserDTO, UserSignUpDTO } from './userDTO';
+import * as userRepository from './userRepository';
 
-export function getUser(dto: { id: string }) {
+export function getUser(dto: GetUserDTO): Promise<GetUserDCO | undefined> {
   return userRepository.getUser(dto);
 }
 
-export function createUser(dto: UserSignUpDTO) {
-  userRepository.createUsers(dto);
+export function userSignUp(dto: UserSignUpDTO) {
+  userRepository.userSignUp(dto);
 }

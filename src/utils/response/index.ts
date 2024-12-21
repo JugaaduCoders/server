@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import { ZodError } from "zod";
-import { GenericObject } from "../../types";
-import { serverLog } from "../logs";
+import { Request, Response } from 'express';
+import { ZodError } from 'zod';
+import { GenericObject } from '../../types';
+import { serverLog } from '../logs';
 
 export type ResHandlerObj<T> = {
   req?: Request;
@@ -21,7 +21,7 @@ export function defaultErrorHandler(
   callee: string
 ): void {
   if (e instanceof ZodError) {
-    let errorsString = "";
+    let errorsString = '';
     const zodFormErrors = e.flatten().formErrors; // these are the top level errors ... i.e. expected an object and got an array
     const zodFieldErrors = e.flatten().fieldErrors; // these are the property errors ... i.e. one field on object is wrong type
 
@@ -30,7 +30,7 @@ export function defaultErrorHandler(
       for (const key in zodFieldErrors) {
         if (zodFieldErrors[key]) {
           const message =
-            zodFieldErrors[key]?.[0] === "Required"
+            zodFieldErrors[key]?.[0] === 'Required'
               ? `Missing required field '${key}'` // gives a better error message than just 'Required'
               : `Validation failed for field '${key}':  ${zodFieldErrors[key]?.[0]}.`;
           errorsString += message;
@@ -42,7 +42,7 @@ export function defaultErrorHandler(
   }
   return createInternalServerError(
     res,
-    e instanceof Error ? e.message : "Internal-Server-Error",
+    e instanceof Error ? e.message : 'Internal-Server-Error',
     e as Error,
     callee
   );
@@ -167,7 +167,7 @@ export function createMissingField(
     res,
     code: 400,
     success: false,
-    payload: { error: "Missing-Required-Fields" },
+    payload: { error: 'Missing-Required-Fields' },
     message: `Missing required field(s): ${field}`,
     callee,
   });
@@ -177,7 +177,7 @@ const resHandler = (h: ResHandlerObj<unknown | null>) => {
   h.res.logData = h.res.logData || {};
   h.res.logData.responseBody = JSON.stringify(h.payload);
   h.res.logData.responseHeaders = JSON.stringify(h.res.getHeaders());
-  h.res.logData.responseMessage = h.message ? h.message : "";
+  h.res.logData.responseMessage = h.message ? h.message : '';
   h.res.logData.responseStatus = h.code;
   if (h.error) {
     h.res.logData.internalResponse = h.error.message;
@@ -199,8 +199,8 @@ const resHandler = (h: ResHandlerObj<unknown | null>) => {
     }
     h.res.logData.errorFunction = h.callee;
   }
-  if (!h.success && process.env.NODE_ENV === "development") {
-    serverLog("\nSERVER ERROR\n");
+  if (!h.success && process.env.NODE_ENV === 'development') {
+    serverLog('\nSERVER ERROR\n');
     if (h.error instanceof Error) serverLog(h.error);
     else serverLog(h.message, h.callee);
   }
@@ -322,7 +322,7 @@ export function createNotImplemented(res: Response, callee: string) {
     res,
     code: 501,
     success: false,
-    message: "Not Implemented",
+    message: 'Not Implemented',
     callee,
     payload: {},
   });

@@ -1,18 +1,18 @@
-import { Request, Response } from "express";
-import * as userService from "./userService";
-import * as httpRequest from "../../utils/response";
-import { UserSignUpDTOSchema } from "./userDto";
+import { Request, Response } from 'express';
+import * as httpRequest from '../../utils/response';
+import { GetUserDTOSchema, UserSignUpDTOSchema } from './userDTO';
+import * as userService from './userService';
 
 export async function getUser(request: Request, response: Response) {
   const callee = getUser.name;
   const { id } = request.params;
-  const dto = { id: id };
   try {
+    const dto = GetUserDTOSchema.parse({ id });
     const payload = await userService.getUser(dto);
 
     return httpRequest.createSuccess(
       response,
-      "Successfully fetched",
+      'Successfully fetched',
       payload,
       callee
     );
@@ -21,16 +21,13 @@ export async function getUser(request: Request, response: Response) {
   }
 }
 
-export async function createUsers(request: Request, response: Response) {
-  const callee = createUsers.name;
-  const users = request.body;
-
+export async function userSignUp(request: Request, response: Response) {
+  const callee = userSignUp.name;
   try {
-    const dto = UserSignUpDTOSchema.parse(users);
-    const message = `${dto.length === 1 ? "User" : "Users"} registered successfully!`;
-    userService.createUser(dto);
-    console.log("msg = ", message);
-    return httpRequest.createNoContent(response, message, callee);
+    const dto = UserSignUpDTOSchema.parse(request.body);
+    const message = `${dto.length === 1 ? 'User' : 'Users'} registered successfully!`;
+    userService.userSignUp(dto);
+    return httpRequest.createCreated(response, message, '', callee);
   } catch (err: Error | unknown) {
     return httpRequest.defaultErrorHandler(response, err, callee);
   }

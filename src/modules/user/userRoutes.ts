@@ -1,10 +1,10 @@
-import express from "express";
-import * as userController from "./userController";
+import express from 'express';
+import * as userController from './userController';
 
-const app = express();
+const userRoutes = express();
 
-app.get("/:id", userController.getUser);
+userRoutes.get('/:id', userController.getUser);
 
-app.post("/", userController.createUsers);
+userRoutes.post('/', userController.userSignUp);
 
-export default app;
+export default userRoutes;

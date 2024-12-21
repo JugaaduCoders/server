@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
-import { serverLog } from "../logs";
+import jwt from 'jsonwebtoken';
+import { serverLog } from '../logs';
 
 export function generateToken(user: User) {
   const payload = {
@@ -9,7 +9,7 @@ export function generateToken(user: User) {
     role: user.role,
   };
   const options = {
-    expiresIn: "7d",
+    expiresIn: '7d',
   };
   return jwt.sign(payload, process.env.JWT_SECRET, options);
 }
@@ -20,6 +20,6 @@ export function verifyToken(token: string): User {
     return decode as User;
   } catch (error: Error | unknown) {
     serverLog(error);
-    throw new Error("Invalid or expired token");
+    throw new Error('Invalid or expired token');
   }
 }
