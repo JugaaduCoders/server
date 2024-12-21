@@ -1,6 +1,6 @@
+import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { Pool } from "pg";
-import dotenv from "dotenv";
 
 dotenv.config();
 
