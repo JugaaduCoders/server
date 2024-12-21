@@ -1,20 +1,19 @@
+import { relations } from 'drizzle-orm';
 import {
+  boolean,
   date,
   integer,
   pgTable,
-  varchar,
-  boolean,
-  smallint,
   serial,
-} from "drizzle-orm/pg-core";
-import { user } from "./user";
-import { timestamps } from "./schema.helper";
-import { relations } from "drizzle-orm";
-import { hackathonParticipant } from "./hackathonParticipant";
+  smallint,
+  varchar,
+} from 'drizzle-orm/pg-core';
+import { hackathonParticipant } from './hackathonParticipant';
+import { timestamps } from './schema.helper';
+import { user } from './user';
 
-//
 // we used date() instead of timestamp() because we are implementing linear time for starting, ending and registration of a hackathon
-export const hackathon = pgTable("Hackathons", {
+export const hackathon = pgTable('Hackathons', {
   id: serial().primaryKey(),
   createdBy: integer().references(() => user.id),
   name: varchar({ length: 255 }).notNull(),

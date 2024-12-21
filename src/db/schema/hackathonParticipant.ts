@@ -1,11 +1,16 @@
-import { integer, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
-import { hackathon } from "./hackathon";
-import { user } from "./user";
-import { relations } from "drizzle-orm";
-import { serial } from "drizzle-orm/pg-core";
+import { relations } from 'drizzle-orm';
+import {
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core';
+import { hackathon } from './hackathon';
+import { user } from './user';
 
 // here we are using timestamp() instead of date() because we want the time as well
-export const hackathonParticipant = pgTable("HackathonParticipants", {
+export const hackathonParticipant = pgTable('HackathonParticipants', {
   id: serial().primaryKey(),
   submittedDate: timestamp(),
   submittedUrl: varchar({ length: 255 }),

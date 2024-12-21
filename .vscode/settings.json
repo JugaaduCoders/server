@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["hackathon"],
+  "cSpell.words": ["esbuild", "hackathon", "Hackathons"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.ts": "always",
@@ -8,6 +8,7 @@
     "source.sortImports": "always"
   },
   "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
