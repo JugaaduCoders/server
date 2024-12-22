@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { capitalizedString } from './string';
+import { capitalizedString } from '../string';
+import { dtoTemplate } from './dtoTemplate';
+import { routeTemplate } from './routeTemplate';
 
 function createStructure(folderName: string) {
   if (!folderName) {
@@ -30,29 +32,8 @@ function createStructure(folderName: string) {
   const capitalized = capitalizedString(folderName);
 
   const templates = {
-    [`${folderName}DTO.ts`]: `import { z } from 'zod';`,
-    [`${folderName}Routes.ts`]: `
-import express from 'express';
-import * as ${folderName}Controller from './${folderName}Controller';
-
-const ${folderName}Routes = express();
-
-${folderName}Routes.get('/:id', ${folderName}Controller.get${capitalized});
-
-${folderName}Routes.get('/', ${folderName}Controller.get${capitalized}s);
-
-${folderName}Routes.post('/', ${folderName}Controller.create${capitalized}s);
-
-${folderName}Routes.put('/:id', ${folderName}Controller.update${capitalized});
-
-${folderName}Routes.put('/', ${folderName}Controller.update${capitalized}s);
-
-${folderName}Routes.delete('/', ${folderName}Controller.delete${capitalized}s);
-
-${folderName}Routes.delete('/:id', ${folderName}Controller.delete${capitalized});
-
-export default ${folderName}Routes;
-`,
+    [`${folderName}DTO.ts`]: dtoTemplate(),
+    [`${folderName}Routes.ts`]: routeTemplate(folderName, capitalized),
     // TODO: create template for them
     [`${folderName}Controller.ts`]: ``,
     [`${folderName}Repository.ts`]: ``,

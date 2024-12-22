@@ -12,7 +12,7 @@
     "lint:check": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest",
-    "g": "ts-node src/utils/generateModules.ts"
+    "g": "ts-node src/utils/templateGeneration/generateModules.ts"
   },
   "lint-staged": {
     "*.ts": [
