@@ -26,7 +26,7 @@ export async function userSignUp(request: Request, response: Response) {
   try {
     const dto = UserSignUpDTOSchema.parse(request.body);
     const message = `${dto.length === 1 ? 'User' : 'Users'} registered successfully!`;
-    userService.userSignUp(dto);
+    await userService.userSignUp(dto);
     return httpRequest.createCreated(response, message, '', callee);
   } catch (err: Error | unknown) {
     return httpRequest.defaultErrorHandler(response, err, callee);

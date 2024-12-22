@@ -1,7 +1,11 @@
 import express from 'express';
-// import hackathonRoutes from "./modules/hackathon/hackathonRoutes";
+import authRoutes from './modules/auth/authRoutes';
 import userRoutes from './modules/user/userRoutes';
+import { authMiddleware } from './utils/middleware';
+
 const app = express();
-app.use('/api/user', userRoutes);
+
+app.use('/api/user', authMiddleware, userRoutes);
+app.use('/api/auth', authRoutes);
 
 export default app;

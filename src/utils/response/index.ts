@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ZodError } from 'zod';
 import { GenericObject } from '../../types';
+import { CustomError } from '../error/CustomError';
 import { serverLog } from '../logs';
 
 export type ResHandlerObj<T> = {
@@ -39,6 +40,9 @@ export function defaultErrorHandler(
       }
     }
     return createBadRequest(res, errorsString, callee);
+  }
+  if (e instanceof CustomError) {
+    return createBadRequest(res, e.message, callee);
   }
   return createInternalServerError(
     res,

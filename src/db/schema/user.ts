@@ -12,7 +12,7 @@ export const user = pgTable('Users', {
   firstName: varchar({ length: 255 }).notNull(),
   lastName: varchar({ length: 255 }),
   email: varchar({ length: 255 }).notNull().unique(),
-  password: varchar({ length: 255 }),
+  password: varchar(),
   role: rolesEnum().notNull(),
   ...timestamps,
 });

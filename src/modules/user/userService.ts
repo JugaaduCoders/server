@@ -7,5 +7,5 @@ export function getUser(dto: GetUserDTO): Promise<GetUserDCO | undefined> {
 }
 
 export function userSignUp(dto: UserSignUpDTO) {
-  userRepository.userSignUp(dto);
+  return userRepository.userSignUp(dto);
 }
