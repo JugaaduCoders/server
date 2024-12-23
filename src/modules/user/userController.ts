@@ -3,12 +3,12 @@ import * as httpRequest from '../../utils/response';
 import { GetUserDTOSchema, UserSignUpDTOSchema } from './userDTO';
 import * as userService from './userService';
 
-export async function getUser(request: Request, response: Response) {
-  const callee = getUser.name;
+export async function getUserById(request: Request, response: Response) {
+  const callee = getUserById.name;
   const { id } = request.params;
   try {
     const dto = GetUserDTOSchema.parse({ id });
-    const payload = await userService.getUser(dto);
+    const payload = await userService.getUserById(dto);
 
     return httpRequest.createSuccess(
       response,

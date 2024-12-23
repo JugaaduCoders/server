@@ -1,8 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import { capitalizedString } from '../string';
+import { controllerTemplate } from './controllerTemplate';
 import { dtoTemplate } from './dtoTemplate';
-import { routeTemplate } from './routeTemplate';
+import { repositoryTemplate } from './repositoryTemplate';
+import { routerTemplate } from './routerTemplate';
+import { serviceTemplate } from './serviceTemplate';
+import { dcoTemplate } from './dcoTemplate';
 
 function createStructure(folderName: string) {
   if (!folderName) {
@@ -10,7 +14,7 @@ function createStructure(folderName: string) {
     return;
   }
 
-  const basePath = path.join(__dirname, '../modules', folderName);
+  const basePath = path.join(__dirname, '../../modules', folderName);
 
   const files = [
     `${folderName}DCO.ts`,
@@ -32,12 +36,12 @@ function createStructure(folderName: string) {
   const capitalized = capitalizedString(folderName);
 
   const templates = {
-    [`${folderName}DTO.ts`]: dtoTemplate(),
-    [`${folderName}Routes.ts`]: routeTemplate(folderName, capitalized),
-    // TODO: create template for them
-    [`${folderName}Controller.ts`]: ``,
-    [`${folderName}Repository.ts`]: ``,
-    [`${folderName}Service.ts`]: ``,
+    [`${folderName}DTO.ts`]: dtoTemplate(capitalized),
+    [`${folderName}DCO.ts`]: dcoTemplate(capitalized),
+    [`${folderName}Routes.ts`]: routerTemplate(folderName, capitalized),
+    [`${folderName}Controller.ts`]: controllerTemplate(folderName, capitalized),
+    [`${folderName}Repository.ts`]: repositoryTemplate(folderName, capitalized),
+    [`${folderName}Service.ts`]: serviceTemplate(folderName, capitalized),
   };
 
   files.forEach((file) => {
