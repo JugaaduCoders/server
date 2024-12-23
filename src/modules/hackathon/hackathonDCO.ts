@@ -10,4 +10,5 @@ export type GetHackathonDCO = {
   endDate: string;
   isPublic: boolean | null;
   maxTeamSize: number | null;
+  imageUrl: string | null;
 };

@@ -8,7 +8,7 @@ import { authMiddleware } from './utils/middleware';
 const app = express();
 
 app.use('/api/user', authMiddleware, userRoutes);
-app.use('/api/hackathon', authMiddleware, hackathonRoutes);
+app.use('/api/hackathon', hackathonRoutes);
 app.use('/api/auth', authRoutes);
 
 export default app;
