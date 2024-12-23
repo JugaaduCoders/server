@@ -2,16 +2,10 @@ import jwt from 'jsonwebtoken';
 import { serverLog } from '../logs';
 
 export function generateToken(user: User) {
-  const payload = {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role,
-  };
   const options = {
     expiresIn: '7d',
   };
-  return jwt.sign(payload, process.env.JWT_SECRET, options);
+  return jwt.sign(user, process.env.JWT_SECRET, options);
 }
 
 export function verifyToken(token: string): User {

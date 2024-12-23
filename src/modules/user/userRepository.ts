@@ -3,6 +3,7 @@ import { chunk } from 'lodash';
 import { db } from '../../db';
 import { user } from '../../db/schema/user';
 import { CHUNK_SIZE } from '../constants';
+import { GetUserDCO } from './userDCO';
 import { GetUserDTO, UserSignUpDTO } from './userDTO';
 
 export async function getUserById(dto: GetUserDTO) {
@@ -18,7 +19,7 @@ export async function userSignUp(dto: UserSignUpDTO) {
       chunks.map(async (userChunk) => {
         await tx
           .insert(user)
-          .values(userChunk as unknown as typeof user.$inferInsert)
+          .values(userChunk as (typeof user.$inferInsert)[])
           .execute();
       })
     );

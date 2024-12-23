@@ -3,9 +3,13 @@ declare global {
 
   interface User {
     id: number;
-    name: string;
+    firstName: string;
+    lastName: string | null;
     email: string;
     role: UserRole;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date | null;
   }
 }
 
