@@ -11,7 +11,8 @@
     "format:write": "prettier --write .",
     "lint:check": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "jest"
+    "test": "jest",
+    "g": "ts-node src/utils/templateGeneration/generateModules.ts"
   },
   "lint-staged": {
     "*.ts": [

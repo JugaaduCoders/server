@@ -3,12 +3,9 @@ import { chunk } from 'lodash';
 import { db } from '../../db';
 import { user } from '../../db/schema/user';
 import { CHUNK_SIZE } from '../constants';
-import { GetUserDCO } from './userDCO';
 import { GetUserDTO, UserSignUpDTO } from './userDTO';
 
-export async function getUser(
-  dto: GetUserDTO
-): Promise<GetUserDCO | undefined> {
+export async function getUserById(dto: GetUserDTO) {
   return await db.query.user.findFirst({
     where: eq(user.id, Number(dto.id)),
   });
