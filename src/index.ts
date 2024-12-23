@@ -19,7 +19,7 @@ async function findAvailablePort(startPort: number): Promise<number> {
   return new Promise((resolve) => {
     const server = http.createServer();
     server.listen(startPort, () => {
-      server.close(() => resolve(startPort)); // Port is available
+      server.close(() => resolve(startPort));
     });
     server.on('error', async () => {
       const userResponse = await askUserQuestion(
