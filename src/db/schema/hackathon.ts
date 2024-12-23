@@ -6,6 +6,7 @@ import {
   pgTable,
   serial,
   smallint,
+  text,
   varchar,
 } from 'drizzle-orm/pg-core';
 import { hackathonParticipant } from './hackathonParticipant';
@@ -22,6 +23,7 @@ export const hackathon = pgTable('Hackathons', {
   endDate: date().notNull(),
   isPublic: boolean().default(true),
   maxTeamSize: smallint(),
+  imageUrl: text(),
   ...timestamps,
 });
 
