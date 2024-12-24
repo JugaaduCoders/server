@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { verifyToken } from './jwt';
 import { createUnauthenticated, createUnauthorized } from './response';
+import redisClient from '../services/redisService';
 
-export const authMiddleware = (
+export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -19,8 +20,13 @@ export const authMiddleware = (
   }
 
   try {
-    const decode = verifyToken(val2);
-    req.user = decode;
+    const id = verifyToken(val2);
+    const userData = await redisClient.get(token);
+    const user = JSON.parse(userData ?? '');
+    if (!userData || id === user.id) {
+      return createUnauthenticated(res, '', 'Verification token not found');
+    }
+    req.user = user;
     next();
   } catch (error: Error | unknown) {
     return createUnauthorized(res, (error as Error).message, '');
