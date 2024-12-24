@@ -5,7 +5,7 @@ export function generateToken(user: User) {
   const options = {
     expiresIn: '7d',
   };
-  return jwt.sign(user.id.toString(), process.env.JWT_SECRET, options);
+  return jwt.sign(user, process.env.JWT_SECRET, options);
 }
 
 export function verifyToken(token: string): number {
