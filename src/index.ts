@@ -7,6 +7,7 @@ import http from 'http';
 import readline from 'readline';
 import swaggerUi from 'swagger-ui-express';
 import routes from './routes';
+import { redis } from './services/redisService';
 import swaggerSpec from './swagger';
 
 const app = express();
@@ -74,6 +75,7 @@ async function startServer() {
       );
     }
   });
+  await redis.initializeRedis();
 }
 
 startServer().catch((err) => {
