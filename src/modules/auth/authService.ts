@@ -1,3 +1,4 @@
+import redisClient from '../../services/redisService';
 import { CustomError } from '../../utils/error/CustomError';
 import { hashing } from '../../utils/hashPassword';
 import { generateToken } from '../../utils/jwt';
@@ -17,6 +18,7 @@ export async function userLogin(dto: UserLoginDTO): Promise<UserLoginDCO> {
     );
     if (isCorrectPass) {
       const authToken = generateToken(user);
+      await redisClient.set(authToken, JSON.stringify(user), { EX: 180 });
       return { user, authToken };
     }
     throw new CustomError('Incorrect Password, please try again');
