@@ -75,7 +75,12 @@ async function startServer() {
       );
     }
   });
-  await redis.initializeRedis();
+
+  try {
+    await redis.initializeRedis();
+  } catch (e: Error | unknown) {
+    console.log('Redis is not running', e);
+  }
 }
 
 startServer().catch((err) => {

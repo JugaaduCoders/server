@@ -1,7 +1,7 @@
-import express from 'express';
+import { Router } from 'express';
 import * as userController from './userController';
 
-const userRoutes = express();
+const userRoutes = Router();
 
 userRoutes.get('/:id', userController.getUserById);
 
