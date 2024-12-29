@@ -1,8 +1,8 @@
-import express from 'express';
+import { Router } from 'express';
 import multer from 'multer';
 import * as hackathonController from './hackathonController';
 
-const hackathonRoutes = express();
+const hackathonRoutes = Router();
 const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 },
   storage: multer.memoryStorage(),

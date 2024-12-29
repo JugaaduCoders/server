@@ -9,18 +9,16 @@ export const GeHackathonDTOSchema = z.object({
 export const CreateHackathonDTOSchema = z.object({
   createdBy: z.number().int().positive(),
   name: z.string().min(1).max(255),
-  registrationDeadline: z.string().refine((date) => !isNaN(Date.parse(date)), {
-    message: 'Invalid registration deadline date',
-  }),
-  startDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
-    message: 'Invalid start date',
-  }),
-  endDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
-    message: 'Invalid end date',
-  }),
+  registrationDeadline: z.coerce.date(),
+  startDate: z.coerce.date(),
+  endDate: z.coerce.date(),
   isPublic: z.boolean().optional().default(true),
   maxTeamSize: z.number().int().positive().max(12).optional(),
   imageURL: z.string().url().optional(),
+  requirements: z.string(),
+  themes: z.string().optional(),
+  prizes: z.string().optional(),
+  overview: z.string(),
 });
 /* ----------------- DTOs ---------------- */
 
